@@ -51,4 +51,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+
+/// 原生模版广告请求对象
+@interface KLNUnifiedNativeAdRequest : KLNAdRequest
+
+/// 一次请求自渲染广告个数，推荐请求1-3个，一次最多请求10个。
+@property (nonatomic, assign) NSUInteger adCount;
+
+@end
+
 NS_ASSUME_NONNULL_END
