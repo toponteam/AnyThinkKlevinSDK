@@ -51,12 +51,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+/// 视频素材下载策略
+typedef NS_ENUM(NSInteger, KLNVideoDownloadPolicy) {
+    KLNVideoDownloadPolicyAlways = 0,      ///< 默认自动下载视频
+    KLNVideoDownloadPolicyWifiOnly,         ///< 仅WIFI环境自动下载视频
+};
 
 /// 原生模版广告请求对象
 @interface KLNUnifiedNativeAdRequest : KLNAdRequest
 
 /// 一次请求自渲染广告个数，推荐请求1-3个，一次最多请求10个。
 @property (nonatomic, assign) NSUInteger adCount;
+
+/// 视频素材下载策略：控制视频素材下载时机
+@property (nonatomic, assign) KLNVideoDownloadPolicy autoDownloadPolicy;
 
 @end
 
