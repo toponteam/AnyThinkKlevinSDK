@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
     s.name             = 'AnyThinkKlevinSDK'
-    s.version          = '2.4.1'
+    s.version          = '2.7.2.206'
     s.summary          = 'AnyThinkKlevinSDK'
 
     s.description      = <<-DESC

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <KlevinAdSDK/KLNAdRequest.h>
 #import <KlevinAdSDK/KLNAdVideoController.h>
+#import <KlevinAdSDK/KLNAdBiddingProtocol.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -36,8 +37,10 @@ typedef NS_ENUM(NSUInteger, KLNUnifiedNativeAdVideoAutoPlayPolicy) {
 typedef void (^KLNUnifiedNativeAdLoadCompletionHandler)(NSArray<KLNUnifiedNativeAd *> *_Nullable adList,
                                                        NSError *_Nullable error);
 
-///自渲染广告
-@interface KLNUnifiedNativeAd : NSObject
+
+///自渲染广告。请注意，在主线程中使用该类！！！
+@interface KLNUnifiedNativeAd : NSObject<KLNAdBiddingProtocol>
+
 
 /// 广告事件回调对象
 @property (nonatomic, weak, nullable) id<KLNUnifiedNativeAdDelegate> delegate;
@@ -57,7 +60,7 @@ typedef void (^KLNUnifiedNativeAdLoadCompletionHandler)(NSArray<KLNUnifiedNative
 /// 按钮文案
 @property (nonatomic, readonly, nullable) NSString *actionTitle;
 
-/// 是否为视频广告
+/// 广告类型
 @property (nonatomic, readonly) KLNUnifiedNativeAdType adType;
 
 /// 广告图标
@@ -110,14 +113,13 @@ typedef void (^KLNUnifiedNativeAdLoadCompletionHandler)(NSArray<KLNUnifiedNative
 /// 用户手动关闭广告时，请调用该方法
 - (void)dislike;
 
-
 @end
 
 @protocol KLNUnifiedNativeAdDelegate <NSObject>
 
 @optional
 
-/// 广告素材加载成功回调
+/// 广告素材加载结果回调
 /// @param ad  KLNUnifiedNativeAd实例
 /// @param error 素材加载成功为nil，失败非nil
 - (void)kln_unifiedNativeAdDidLoad:(KLNUnifiedNativeAd *)ad didCompleteWithError:(NSError *_Nullable)error;
